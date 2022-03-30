@@ -1,0 +1,1 @@
+curl -X POST "http://127.0.0.1/4151/channel/empty?topic=name&channel=name"
