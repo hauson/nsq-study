@@ -1,5 +1,8 @@
 # nsq-study
 
+# nsq 官网
+https://nsq.io/overview/design.html
+
 ## 学习的模块
  生产者
  消费者
