@@ -6,32 +6,6 @@ import (
 	"github.com/nsqio/go-nsq"
 )
 
-func init() {
-	//var q *nsq.Consumer
-
-	//q.IsStarved()
-	//q.Stats()
-	//q.Stop()
-	//
-	//q.SetLoggerLevel()
-	//q.SetLogger()
-	//q.SetLoggerForLevel()
-	//
-	//q.AddConcurrentHandlers()
-	//q.AddHandler()
-	//
-	//q.ChangeMaxInFlight()
-	//
-	//q.ConnectToNSQD()
-	//q.ConnectToNSQDs()
-	//
-	//q.DisconnectFromNSQD()
-	//q.DisconnectFromNSQLookupd()
-	//
-	//q.SetBehaviorDelegate()
-	//q.SetLookupdHttpClient()
-}
-
 type MessageHandler struct {
 	channel string
 }

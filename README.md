@@ -10,3 +10,7 @@ https://nsq.io/overview/design.html
  admin
  服务发现 -  这两个是重点
  分布式   -  这两个是重点
+
+## 线索型的数据, 方法, 主要是外部的
+
+# tcpserver  -- 将这块的内容拆出来，学习下
