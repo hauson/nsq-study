@@ -14,3 +14,4 @@ https://nsq.io/overview/design.html
 ## 线索型的数据, 方法, 主要是外部的
 
 # tcpserver  -- 将这块的内容拆出来，学习下
+# 形成一个容易测试的闭环

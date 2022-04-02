@@ -7,7 +7,6 @@ import (
 	"runtime"
 	"strings"
 	"sync"
-	"time"
 )
 
 func main() {
@@ -19,6 +18,7 @@ func main() {
 		panic(err)
 	}
 
+	tcpserver := tcpServer{}
 	err = func(listener net.Listener) error {
 		log.Println("TCP: listening on %s", listener.Addr())
 
@@ -41,10 +41,7 @@ func main() {
 
 			wg.Add(1)
 			go func() {
-				for {
-					time.Sleep(10 * time.Second)
-					_ = clientConn
-				}
+				tcpserver.Handle(clientConn)
 				wg.Done()
 			}()
 		}
