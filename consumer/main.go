@@ -24,8 +24,9 @@ func runConsuemr(topic string, channel string) {
 	}
 
 	q.AddHandler(messageHandler)
-	//4150
-	if err = q.ConnectToNSQD("127.0.0.1:7151"); err != nil {
+
+	//if err = q.ConnectToNSQD("127.0.0.1:4150"); err != nil {
+	if err = q.ConnectToNSQLookupd("127.0.0.1:4161"); err != nil {
 		panic(err)
 	}
 
