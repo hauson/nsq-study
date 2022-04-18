@@ -1,0 +1,4 @@
+FROM golang:1.16 as build
+FROM scratch
+
+CMD ["/bin/bash", "-c", " echo 'hello, world'"]
