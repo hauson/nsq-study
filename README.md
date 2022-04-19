@@ -29,3 +29,4 @@ https://nsq.io/overview/design.html
 # 关键点， 处理掉并发, 通过加锁和其他方式
 
 #1. 使用docker-compose 启动本地服务
+#2. 编译两个bin: server, client

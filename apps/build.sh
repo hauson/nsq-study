@@ -3,7 +3,7 @@
 # define var
 image=chx
 tag=v1
-container=shanshi1
+container=s1
 
 # deocker
 echo ${image}:${tag}
@@ -12,3 +12,8 @@ docker rmi ${image}:${tag}
 docker build -f dockerfile -t ${image}:${tag} .
 docker images |grep ${image} | grep ${tag}
 docker run --name ${container} -d ${image}:${tag}
+
+# docker-compose up -d
+# docker-compose down
+# docker-compose ps #查看各个组件的运行详情
+# docker-compose logs #查看组件日志
