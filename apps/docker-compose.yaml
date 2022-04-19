@@ -5,3 +5,13 @@ services:
     ports:
       - "3000:3000"
     container_name: insqd
+  producer:
+    build: ./producer
+    ports:
+      - "3001:3000"
+    container_name: producer
+  consumer:
+    build: ./consumer
+    ports:
+      - "3002:3000"
+    container_name: consumer
