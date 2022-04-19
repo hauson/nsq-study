@@ -27,4 +27,3 @@ FROM scratch as prod
 # EXPOSE 3000
 
 # CMD ["/main","/config.json"]
-CMD echo "hello, world"

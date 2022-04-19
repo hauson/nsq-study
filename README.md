@@ -27,3 +27,5 @@ https://nsq.io/overview/design.html
 
 # 服务发现， admin 本质上都是消息驱动机制
 # 关键点， 处理掉并发, 通过加锁和其他方式
+
+#1. 使用docker-compose 启动本地服务
