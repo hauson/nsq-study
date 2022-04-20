@@ -16,12 +16,14 @@ https://nsq.io/overview/design.html
 # tcpserver  -- 将这块的内容拆出来，学习下
 # 形成一个容易测试的闭环
 
-# 2. server 建立tcp的监听, client 建立tcp的发送
+# 4.建立起消息处理进程
+# 5.server端：建立消息驱动机制, msgtype -> msghandler
+# 6.建立起 "进程结束的机制", 关闭机制
+
 # -----
 # 0. lookupd 用用于后期的服务发现, 整个项目尽量使用 channel来解决并发的问题
 # 3. 维持长连接的存活, 在服务端发心跳，还是在client端发送心跳包
 # 4. 建立消息的封装和解封装的协议层 protocol
-# 5. server端：建立消息驱动机制, msgtype -> msghandler
 # 6. client端：建立消息的驱动机制， mystype ->msghandler
 
 
