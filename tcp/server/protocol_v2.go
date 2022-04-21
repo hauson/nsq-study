@@ -3,10 +3,11 @@ package main
 import (
 	"bufio"
 	"fmt"
-	"github.com/hauson/nsq-study/tcp/protocol"
 	"io"
 	"net"
 	"time"
+
+	"github.com/hauson/nsq-study/tcp/protocol"
 )
 
 const defaultBufferSize int = 16 * 1024

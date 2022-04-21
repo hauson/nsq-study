@@ -3,10 +3,11 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/hauson/nsq-study/apps/nsqd/protocol"
 	"log"
 	"net"
 	"time"
+
+	"github.com/hauson/nsq-study/apps/nsqd/protocol"
 )
 
 func main() {

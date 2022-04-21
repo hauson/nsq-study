@@ -3,8 +3,9 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/nsqio/go-nsq"
 	"testing"
+
+	"github.com/nsqio/go-nsq"
 )
 
 func init() {

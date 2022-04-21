@@ -2,10 +2,11 @@ package main
 
 import (
 	"fmt"
-	"github.com/hauson/nsq-study/tcp/protocol"
 	"net"
 	"sync"
 	"time"
+
+	"github.com/hauson/nsq-study/tcp/protocol"
 )
 
 //inputs: 127.0.0.1:4151, topic, channel

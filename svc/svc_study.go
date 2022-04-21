@@ -2,13 +2,13 @@ package main
 
 import (
 	"fmt"
-	svc "github.com/judwhite/go-svc"
 	"log"
 	"syscall"
+
+	svc "github.com/judwhite/go-svc"
 )
 
 type program struct {
-
 }
 
 func (p *program) Init(env svc.Environment) error {

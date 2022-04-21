@@ -2,10 +2,11 @@ package main
 
 import (
 	"encoding/json"
-	"github.com/hauson/nsq-study/apps/nsqd/protocol"
 	"log"
 	"net"
 	"sync"
+
+	"github.com/hauson/nsq-study/apps/nsqd/protocol"
 )
 
 type Conn struct {

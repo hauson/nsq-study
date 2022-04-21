@@ -6,7 +6,6 @@ import (
 	"testing"
 )
 
-
 // The swap operation, implemented by the SwapT functions, is the atomic
 // equivalent of:
 //
@@ -36,9 +35,9 @@ import (
 
 func Test_CompareAndSwapInt32(t *testing.T) {
 	/*
-	addr == old: 为真，替换为new值
-	addr != old: 为假， 不替换
-	 */
+		addr == old: 为真，替换为new值
+		addr != old: 为假， 不替换
+	*/
 
 	var addr int32 = 0
 	if atomic.CompareAndSwapInt32(&addr, 0, 1) {

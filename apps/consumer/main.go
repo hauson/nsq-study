@@ -2,78 +2,42 @@ package main
 
 import (
 	"fmt"
-	"sync"
 	"time"
+
+	"github.com/hauson/nsq-study/apps/frame"
 )
 
 func main() {
-	exitSig := make(chan int)
+	exitSig := frame.New(func() error {
+		fmt.Println("hello,world")
+		return nil
+	})
 
-	fmt.Println("hello, world")
-	/*
-		var wg sync.WaitGroup
-		wg.Add(3)
-		exitSig := make(chan interface{})
-		go func() {
-			defer wg.Done()
+	fmt.Println("start")
 
-			<- exitSig
-			fmt.Println("close goroutine 1")
-		}()
+	exitSig.RunGo(func(exitSig <-chan int) {
+		for {
+			select {
+			case <-exitSig:
+				fmt.Println("close goroutine 1")
+				return
+			default:
+				time.Sleep(3 * time.Second)
+				fmt.Println("work 1")
+			}
+		}
+	})
 
-		go func() {
-			defer wg.Done()
+	exitSig.RunGo(func(exitSig <-chan int) {
+		<-exitSig
+		fmt.Println("close goroutine 2")
+	})
 
-			<- exitSig
-			fmt.Println("close goroutine 2")
-		}()
-
-		go func() {
-			defer wg.Done()
-
-			<- exitSig
-			fmt.Println("close goroutine 3")
-		}()
-	*/
-
-	go SaveClose(exitSig)
-	//go fmt.Println(IsClose(exitSig))
-
-	go SaveClose(exitSig)
+	exitSig.RunGo(func(exitSig <-chan int) {
+		<-exitSig
+		fmt.Println("close goroutine 3")
+	})
 
 	time.Sleep(3 * time.Second)
-	fmt.Println("exit success")
-}
-
-type ExitSig struct {
-	wg       sync.WaitGroup
-	Ch       chan int
-	callback func() error
-}
-
-func New(f func() error) *ExitSig {
-	return &ExitSig{
-		Ch:       make(chan int),
-		callback: f,
-	}
-}
-
-func (s *ExitSig) IsClose() bool {
-	select {
-	case <-s.Ch:
-		return true
-	default:
-		return false
-	}
-}
-
-func (s *ExitSig) Close() error {
-	select {
-	case <-s.Ch:
-		return nil
-	default:
-		close(s.Ch)
-		s.wg.Wait()
-		return s.callback()
-	}
+	exitSig.Close()
 }

@@ -2,10 +2,11 @@ package main
 
 import (
 	"fmt"
-	"github.com/hauson/nsq-study/apps/nsqd/protocol"
 	"log"
 	"net"
 	"strings"
+
+	"github.com/hauson/nsq-study/apps/nsqd/protocol"
 )
 
 func main() {

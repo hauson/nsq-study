@@ -1,11 +1,12 @@
 package main
 
 import (
-	"github.com/hauson/nsq-study/tcp/protocol"
 	"io"
 	"log"
 	"net"
 	"sync"
+
+	"github.com/hauson/nsq-study/tcp/protocol"
 )
 
 type ClientStats interface {

@@ -1,8 +1,9 @@
 package pump
 
 import (
-	"github.com/hauson/nsq-study/apps/nsqd/protocol"
 	"sync"
+
+	"github.com/hauson/nsq-study/apps/nsqd/protocol"
 )
 
 type Pump struct {
