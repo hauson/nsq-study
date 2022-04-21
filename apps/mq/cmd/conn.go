@@ -4,36 +4,34 @@ import (
 	"encoding/json"
 	"log"
 	"net"
-	"sync"
 
-	"github.com/hauson/nsq-study/apps/nsqd/protocol"
+	"github.com/hauson/nsq-study/apps/exitsig"
+	"github.com/hauson/nsq-study/apps/mq/protocol"
 )
 
 type Conn struct {
-	client *protocol.Client
-
+	*exitsig.ExitSig
+	client     *protocol.Conn
 	writeMsgCh chan protocol.Msg
-	exitSig    chan interface{}
-	wg         sync.WaitGroup
 }
 
 func NewConn(conn net.Conn, addrMsgCh chan<- protocol.AddrMsg) *Conn {
 	c := &Conn{
-		client:     protocol.NewClient(conn),
+		client:     protocol.NewConn(conn),
 		writeMsgCh: make(chan protocol.Msg, 1024),
-		exitSig:    make(chan interface{}, 1),
+		ExitSig:    exitsig.New(nil),
 	}
 
-	c.wg.Add(2)
-	go c.readLoop(addrMsgCh)
-	go c.writeLoop()
+	c.GoFunc(c.writeLoop)
+
+	c.GoFunc(func(sig exitsig.Sig) {
+		c.readLoop(sig, addrMsgCh)
+	})
 
 	return c
 }
 
-func (c *Conn) writeLoop() {
-	defer c.wg.Done()
-
+func (c *Conn) writeLoop(exitSig exitsig.Sig) {
 	for {
 		select {
 		case msg := <-c.writeMsgCh:
@@ -42,18 +40,16 @@ func (c *Conn) writeLoop() {
 				continue
 			}
 			c.client.Write(bytes)
-		case <-c.exitSig:
+		case <-exitSig:
 			return
 		}
 	}
 }
 
-func (c *Conn) readLoop(msgCh chan<- protocol.AddrMsg) {
-	defer c.wg.Done()
-
+func (c *Conn) readLoop(exitSig exitsig.Sig, msgCh chan<- protocol.AddrMsg) {
 	for {
 		select {
-		case <-c.exitSig:
+		case <-exitSig:
 			return
 		default:
 			data, err := c.client.Read()
@@ -61,15 +57,19 @@ func (c *Conn) readLoop(msgCh chan<- protocol.AddrMsg) {
 				continue
 			}
 
-			log.Println("receive msg", string(data))
+			log.Println("conn receive msg", string(data))
 
-			originMsg := &protocol.Msg{}
-			if err := json.Unmarshal(data, originMsg); err != nil {
+			msg := &protocol.Msg{}
+			if err := json.Unmarshal(data, msg); err != nil {
 				continue
 			}
 
+			if msg.Type == protocol.HeartBeat {
+				c.SendMsg(*msg)
+			}
+
 			msgCh <- protocol.AddrMsg{
-				Msg:  originMsg,
+				Msg:  msg,
 				Addr: c.client.Addr(),
 			}
 		}
@@ -82,10 +82,4 @@ func (s *Conn) SendMsg(msg protocol.Msg) {
 	case s.writeMsgCh <- msg:
 	default:
 	}
-}
-
-// sync block
-func (s *Conn) Close() {
-	close(s.exitSig)
-	s.wg.Wait()
 }

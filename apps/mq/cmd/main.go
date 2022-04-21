@@ -6,7 +6,8 @@ import (
 	"net"
 	"strings"
 
-	"github.com/hauson/nsq-study/apps/nsqd/protocol"
+	"github.com/hauson/nsq-study/apps/mq/protocol"
+	"github.com/hauson/nsq-study/apps/mq/pump"
 )
 
 func main() {
@@ -14,14 +15,11 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-
 	log.Println("TCP: listening on %s", tcpListener.Addr())
+
 	addrMsgCh := make(chan protocol.AddrMsg, 1000)
-	go func(msgCh <-chan protocol.AddrMsg) {
-		for msg := range msgCh {
-			fmt.Println(msg.Addr, *msg.Msg)
-		}
-	}(addrMsgCh)
+	msgPumg := pump.NewMsgPump(addrMsgCh)
+	_ = msgPumg
 
 	for {
 		conn, err := tcpListener.Accept()
@@ -46,6 +44,7 @@ func main() {
 
 	//todo:要阻塞，等所有conns 的协程结束
 	select {}
+	msgPumg.Close()
 
 	log.Printf("INFO TCP: closing %s", tcpListener.Addr())
 	fmt.Println("exit")

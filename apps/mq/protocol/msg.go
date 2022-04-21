@@ -2,6 +2,11 @@ package protocol
 
 import "fmt"
 
+// msg types
+const (
+	HeartBeat = "heartbeat"
+)
+
 type Msg struct {
 	Type string
 	Data interface{}

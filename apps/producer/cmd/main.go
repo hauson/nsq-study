@@ -3,11 +3,12 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/hauson/nsq-study/apps/client"
 	"log"
 	"net"
 	"time"
 
-	"github.com/hauson/nsq-study/apps/nsqd/protocol"
+	"github.com/hauson/nsq-study/apps/mq/protocol"
 )
 
 func main() {
@@ -17,20 +18,21 @@ func main() {
 		log.Fatal(err)
 	}
 
-	client := protocol.NewClient(conn)
-	for i := 0; i < 10; i++ {
-		msg := &protocol.Msg{
-			Type: "unkonwn",
-			Data: "hello, world",
-		}
-		data, err := json.Marshal(msg)
-		if err != nil {
-			log.Fatal(err)
-		}
+	c := client.New(conn)
+	go func() {
+		for {
+			bytes, err := c.Read()
+			if err != nil {
+				log.Fatal(err)
+			}
+			msg := &protocol.Msg{}
+			if err := json.Unmarshal(bytes, msg); err != nil {
+				log.Fatal(err)
+			}
+			fmt.Println(*msg)
 
-		client.Write(data)
-		fmt.Println("send a message")
-		time.Sleep(5 * time.Second)
+		}
+	}()
 
-	}
+	time.Sleep(300 * time.Second)
 }

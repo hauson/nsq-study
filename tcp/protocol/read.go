@@ -25,9 +25,9 @@ func ReadUnpackedResponse(r io.Reader) (int32, []byte, error) {
 //    |  (int32) || (binary)
 //    |  4-byte  || N-byte
 //    ------------------------...
-//      frame ID     data
+//      exitsig ID     data
 //
-// Returns a triplicate of: frame type, data ([]byte), error
+// Returns a triplicate of: exitsig type, data ([]byte), error
 func UnpackResponse(response []byte) (int32, []byte, error) {
 	if len(response) < 4 {
 		return -1, nil, errors.New("length of response is too small")
