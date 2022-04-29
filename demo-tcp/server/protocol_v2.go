@@ -7,7 +7,7 @@ import (
 	"net"
 	"time"
 
-	"github.com/hauson/nsq-study/tcp/protocol"
+	"github.com/hauson/nsq-study/demo-tcp/protocol"
 )
 
 const defaultBufferSize int = 16 * 1024

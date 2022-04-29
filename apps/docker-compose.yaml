@@ -9,9 +9,9 @@ services:
     build: ./producer
     ports:
       - "3001:3000"
-    container_name: producer
+    container_name: demo-producer
   consumer:
     build: ./consumer
     ports:
       - "3002:3000"
-    container_name: consumer
+    container_name: demo-consumer

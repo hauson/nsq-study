@@ -9,27 +9,27 @@ import (
 )
 
 func init() {
-	//var producer *nsq.Producer
+	//var demo-producer *nsq.Producer
 
 	//1. 打印地址
-	//producer.String()
+	//demo-producer.String()
 
 	//2. 链接控制
-	//producer.Ping()
-	//producer.Stop()
+	//demo-producer.Ping()
+	//demo-producer.Stop()
 
 	//3. 发布消息
-	//producer.Publish()
-	//producer.PublishAsync()
-	//producer.DeferredPublish()
-	//producer.DeferredPublishAsync()
-	//producer.MultiPublish()
-	//producer.MultiPublishAsync()
+	//demo-producer.Publish()
+	//demo-producer.PublishAsync()
+	//demo-producer.DeferredPublish()
+	//demo-producer.DeferredPublishAsync()
+	//demo-producer.MultiPublish()
+	//demo-producer.MultiPublishAsync()
 
 	//4. 设置日志
-	//producer.SetLogger()
-	//producer.SetLoggerForLevel()
-	//producer.SetLoggerLevel()
+	//demo-producer.SetLogger()
+	//demo-producer.SetLoggerForLevel()
+	//demo-producer.SetLoggerLevel()
 }
 
 func Test_PublishAsync(t *testing.T) {

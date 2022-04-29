@@ -3,7 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/hauson/nsq-study/apps/client"
+	"github.com/hauson/nsq-study/apps/frame/client"
 	"log"
 	"net"
 	"time"

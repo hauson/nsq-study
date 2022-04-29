@@ -10,7 +10,7 @@ https://nsq.io/overview/design.html
 
 ## 线索型的数据, 方法, 主要是外部的
 
-# 建立起消费者的链接
+# 1.建立起消费者的链接
 # 2.server端：建立消息驱动机制, msgtype -> msghandler
 # 3.建立起大根堆 和 小根堆
 

@@ -6,7 +6,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/hauson/nsq-study/tcp/protocol"
+	"github.com/hauson/nsq-study/demo-tcp/protocol"
 )
 
 //inputs: 127.0.0.1:4151, topic, channel
@@ -16,7 +16,7 @@ func main() {
 		Timeout:   1 * time.Second,
 	}
 
-	conn, err := dialer.Dial("tcp", "127.0.0.1:7151")
+	conn, err := dialer.Dial("demo-tcp", "127.0.0.1:7151")
 	if err != nil {
 		panic(err)
 	}

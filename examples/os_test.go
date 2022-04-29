@@ -1,4 +1,4 @@
-package nsq_study
+package examples
 
 import (
 	"fmt"

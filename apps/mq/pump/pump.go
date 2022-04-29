@@ -3,7 +3,7 @@ package pump
 import (
 	"log"
 
-	"github.com/hauson/nsq-study/apps/exitsig"
+	"github.com/hauson/nsq-study/apps/frame/exitsig"
 	"github.com/hauson/nsq-study/apps/mq/protocol"
 )
 

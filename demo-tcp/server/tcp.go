@@ -6,7 +6,7 @@ import (
 	"net"
 	"sync"
 
-	"github.com/hauson/nsq-study/tcp/protocol"
+	"github.com/hauson/nsq-study/demo-tcp/protocol"
 )
 
 type ClientStats interface {
